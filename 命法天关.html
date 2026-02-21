@@ -421,7 +421,8 @@ function determineUsefulGod(pillars) {
 }
 
 // ==================== 棺材底 ====================
-// 核心: 流年必须是真正的忌神大凶年, 需要多重条件叠加
+// 核心: 流年为忌神年 — 直接为忌/克用/泄用/伤身等多路径均计分
+// 棺材底成立 = 流年不利; 棺材底+棺材盖 = 生死关口(大劫)
 
 function checkCoffinBottom(pillars, godInfo, yearStem, yearBranch, flowBirth) {
   const dayEl = godInfo.dayElement;
@@ -436,24 +437,25 @@ function checkCoffinBottom(pillars, godInfo, yearStem, yearBranch, flowBirth) {
   const fbStemEl = STEM_EL[flowBirth.stem];
   const fbBranchEl = BRANCH_EL[flowBirth.branch];
 
-  // === 主条件: 流年干支为忌神 (必须至少一个成立才有可能) ===
-  const stemIsOminous = yStemEl === ominous;
-  const branchIsOminous = yBranchEl === ominous;
-  if (stemIsOminous) { score += 3; reasons.push('流年天干为忌神(' + ELEMENTS[ominous] + ')'); }
-  if (branchIsOminous) { score += 3; reasons.push('流年地支为忌神'); }
+  // === 主条件: 流年干支为忌神 (+3) ===
+  if (yStemEl === ominous) { score += 3; reasons.push('流年天干为忌神(' + ELEMENTS[ominous] + ')'); }
+  if (yBranchEl === ominous) { score += 3; reasons.push('流年地支为忌神'); }
 
-  // === 辅助条件: 损用伤身 ===
+  // === 次条件: 克泄损害 (+2) ===
   if (CONTROLS[yStemEl] === useful) { score += 2; reasons.push('流年天干克用神'); }
   if (CONTROLS[yStemEl] === dayEl && !godInfo.isStrong) { score += 2; reasons.push('流年克身弱日主'); }
   if ((yearBranch + 6) % 12 === pillars.day.branch) { score += 2; reasons.push('流年冲日支'); }
+  if (GENERATES[yStemEl] === ominous) { score += 2; reasons.push('流年天干生忌神'); }
+  if (CONTROLS[yBranchEl] === useful) { score += 2; reasons.push('流年地支克用神'); }
+  if (GENERATES[useful] === yStemEl) { score += 2; reasons.push('流年泄用神之气'); }
 
-  // === 流生加重 ===
-  if (fbStemEl === ominous && stemIsOminous) { score += 1; reasons.push('流生天干亦为忌神'); }
+  // === 辅条件: 流生加重 (+1) ===
+  if (fbStemEl === ominous) { score += 1; reasons.push('流生天干为忌神'); }
+  if (fbBranchEl === ominous) { score += 1; reasons.push('流生地支为忌神'); }
+  if ((yearBranch + 6) % 12 === pillars.month.branch) { score += 1; reasons.push('流年冲月令'); }
 
-  // 门槛: 需 >= 7 (必须主条件+多个辅助同时成立)
-  // 且必须满足: 流年干或支至少有一个是忌神 (前提条件)
-  const hasMainCondition = stemIsOminous || branchIsOminous;
-  return { isTrue: hasMainCondition && score >= 7, score, reasons };
+  // 门槛: >= 5 (需多条件叠加, 单一条件不足以定论)
+  return { isTrue: score >= 5, score, reasons };
 }
 
 // ==================== 棺材盖 ====================
@@ -667,10 +669,11 @@ function analyzeAllYears(pillars, godInfo, birthYear, birthMonth, birthDay) {
     r.danger = r.severity ? Math.min(r.severity.level + 1, 3) : 2;
   }
 
-  // 4. 单条件成立的年份标为"流年不利" (但不是关口)
+  // 4. 棺材底成立的年份标为"流年不利" (但不是关口)
+  // 注意: 单纯三空年无意义, 不标记; 逢三空须配合棺材底才为大劫
   for (const r of results) {
     if (r.isCrisis) continue;
-    if (r.coffinBottom.isTrue || r.coffinLid.isTrue) r.danger = 1;
+    if (r.coffinBottom.isTrue) r.danger = 1;
   }
 
   return results;
@@ -885,7 +888,7 @@ function showDetail(year) {
     });
     html += `</div>`;
   } else {
-    html += `<span style="color:var(--green)">不成立 (分值${r.coffinBottom.score}/4)</span>`;
+    html += `<span style="color:var(--green)">不成立 (分值${r.coffinBottom.score}/5)</span>`;
   }
   html += `</div>`;
 
