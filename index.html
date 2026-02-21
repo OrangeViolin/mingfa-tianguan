@@ -145,6 +145,61 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
   .timeline{grid-template-columns:repeat(5,1fr)}
   .stats{grid-template-columns:1fr}
 }
+
+/* ===== 寿元评估 ===== */
+.longevity-overview{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
+.longevity-score-card{text-align:center;padding:20px 24px;background:rgba(0,0,0,.3);border-radius:8px;border:1px solid var(--border);min-width:140px}
+.longevity-score-num{font-size:36px;font-weight:bold}
+.longevity-score-label{font-size:12px;margin-top:4px;letter-spacing:2px;color:var(--dim)}
+
+/* 土星四季条 */
+.saturn-bar{display:flex;height:44px;border-radius:6px;overflow:hidden;margin:16px 0;position:relative}
+.saturn-phase{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.85);position:relative;transition:all .3s;cursor:default}
+.saturn-phase .phase-label{font-size:13px;font-weight:bold;letter-spacing:2px}
+.saturn-phase .phase-age{font-size:10px;opacity:.7;margin-top:1px}
+.saturn-spring{background:linear-gradient(135deg,#1a4a1a,#2d7a2d)}
+.saturn-summer{background:linear-gradient(135deg,#7a2000,#c04020)}
+.saturn-autumn{background:linear-gradient(135deg,#6a5a00,#b8960a)}
+.saturn-winter{background:linear-gradient(135deg,#0a2a4a,#2060a0)}
+.saturn-phase.current{box-shadow:inset 0 0 30px rgba(255,255,255,.2);border:2px solid var(--gold)}
+.saturn-note{text-align:center;font-size:12px;color:var(--dim);margin-top:8px;line-height:1.8}
+
+/* 寿元指标 */
+.longevity-indicators{margin-top:16px}
+.longevity-indicator{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;margin:4px 0;border-radius:4px;font-size:13px;line-height:1.6}
+.indicator-positive{background:rgba(39,174,96,.08);border-left:3px solid var(--green);color:var(--green)}
+.indicator-negative{background:rgba(231,76,60,.08);border-left:3px solid var(--red2);color:var(--red2)}
+.indicator-neutral{background:rgba(212,168,75,.06);border-left:3px solid var(--gold);color:var(--gold)}
+.indicator-icon{font-size:14px;margin-top:1px;flex-shrink:0}
+
+/* 哲学卡片 */
+.philosophy-card{padding:20px;background:rgba(212,168,75,.04);border:1px solid rgba(212,168,75,.12);border-radius:8px;margin-bottom:16px}
+.philosophy-card h4{color:var(--gold);font-size:14px;margin-bottom:10px;font-weight:normal;letter-spacing:3px}
+.philosophy-card p{font-size:13px;line-height:2;color:var(--dim)}
+.philosophy-card .hl{color:var(--gold)}
+.philosophy-quote{padding:12px 16px;border-left:2px solid var(--gold);margin:12px 0;color:var(--text);font-size:13px;line-height:1.8}
+
+/* 十神标签 */
+.tengod-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;justify-content:center}
+.tengod-tag{padding:3px 10px;border-radius:3px;font-size:11px;letter-spacing:1px;border:1px solid var(--border);background:rgba(0,0,0,.2)}
+.tengod-tag.god-good{border-color:rgba(39,174,96,.4);color:var(--green);background:rgba(39,174,96,.08)}
+.tengod-tag.god-bad{border-color:rgba(231,76,60,.4);color:var(--red2);background:rgba(231,76,60,.08)}
+.tengod-tag.god-longevity{border-color:rgba(212,168,75,.5);color:var(--gold);background:rgba(212,168,75,.1)}
+
+/* 增强引导 */
+.guidance-section{margin-top:16px;padding:16px;background:rgba(39,174,96,.04);border:1px solid rgba(39,174,96,.12);border-radius:6px}
+.guidance-section h4{color:var(--green);font-size:14px;margin-bottom:10px;font-weight:normal;letter-spacing:2px}
+.guidance-item{font-size:13px;line-height:1.8;color:var(--dim);padding:4px 0 4px 16px;position:relative}
+.guidance-item::before{content:'·';position:absolute;left:4px;color:var(--green)}
+
+/* 年份上下文 */
+.year-context{margin-top:12px;padding:12px;background:rgba(212,168,75,.04);border-radius:4px;font-size:12px;line-height:1.8;color:var(--dim)}
+.year-context .ctx-label{color:var(--gold)}
+
+/* 价值观盒子 */
+.value-box{margin-top:16px;padding:16px;background:rgba(66,165,245,.04);border:1px solid rgba(66,165,245,.12);border-radius:6px}
+.value-box h4{color:var(--water);font-size:14px;margin-bottom:8px;font-weight:normal;letter-spacing:2px}
+.value-box p{font-size:12px;line-height:2;color:var(--dim)}
 </style>
 </head>
 <body>
@@ -154,7 +209,7 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
   <div class="title-section">
     <div class="taiji">☯</div>
     <h1>命法天关</h1>
-    <div class="subtitle">生死关口推演系统 · 古法三空秘诀</div>
+    <div class="subtitle">生死推演 · 寿元评估 · 天道观</div>
   </div>
 
   <!-- 输入区 -->
@@ -206,6 +261,12 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
       <div class="god-info" id="godInfo"></div>
     </div>
 
+    <!-- 寿元评估 -->
+    <div class="result-section fade-in" style="animation-delay:.15s">
+      <div class="section-title">寿 元 评 估</div>
+      <div id="longevityDisplay"></div>
+    </div>
+
     <!-- 生死推演 -->
     <div class="result-section fade-in" style="animation-delay:.2s">
       <div class="section-title">生 死 推 演</div>
@@ -223,6 +284,14 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
     </div>
   </div>
 
+  <!-- 天道观 -->
+  <div id="philosophySection" style="display:none">
+    <div class="result-section fade-in" style="animation-delay:.6s">
+      <div class="section-title">天 道 观</div>
+      <div id="philosophyDisplay"></div>
+    </div>
+  </div>
+
   <!-- 学理参考 -->
   <div class="ref-section">
     <div class="ref-toggle" onclick="toggleRef()">
@@ -230,23 +299,89 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
       <span class="arrow" id="refArrow">▼</span>
     </div>
     <div class="ref-content" id="refContent">
-      <h3>一、论命程序</h3>
+      <h3>一、天道观 — 人之四季</h3>
+      <p>太阳系被周期性统治。地球绕日一周为一年，形成草木的春夏秋冬。人类的「四季」则对应土星绕日周期 — 三十年一周，四个三十年为一个完整循环。</p>
+      <p>人体受气于天，在出生那一刻形成某种「内模式」，这个内模式与外天地的能量波动互相作用。120年间，总会遇上某个点超过自身结构的稳定性。</p>
+      <p style="color:var(--gold)">衰老未必是必然，只是内模式偏离平衡点的现象。死亡未必是必然，只是自身结构崩溃的现象。如果能越过第一个四季，必然有木质化的跃升。长生，从来都不仅仅是幻想。</p>
+
+      <h3>二、论命程序</h3>
       <p>（一）看寿命 →（二）定格局 →（三）定格局高下 →（四）定财富等级 →（五）看婚姻 →（六）看子女 →（七）看老年运</p>
 
-      <h3>二、看寿命与生死</h3>
+      <h3>三、寿夭看法</h3>
+      <h4>高寿之象</h4>
+      <div class="indent">
+        <p>1. 日干得时而专旺成局，贴身伤官或食神旺相健全，吐秀有力。</p>
+        <p>2. 身旺比劫多且有印，食神或伤官成局，或暗藏食伤局者。</p>
+        <p>3. 身弱有根于坐下，印绶旺相健全，且贴身相生有情。</p>
+        <p>4. 身弱印贴身为用神，又有旺官(杀)生用神，又有旺劫或比肩为用神。</p>
+        <p>5. 八字中和，寒暖适中，用神得力，行运又不相悖。</p>
+        <p>6. 八字干支无冲克刑克，身心安泰。</p>
+        <p>7. 日主旺相且得令有气，体神健旺。</p>
+        <p>8. 身旺财弱有食神扶住财星，精气神渊源流长。</p>
+        <p>9. 月令没有遭遇日时严重刑冲，根基稳固。</p>
+      </div>
+
+      <h4>夭命之象</h4>
+      <div class="indent">
+        <p>用神浅薄，忌神深重，喜冲而不冲，忌合而反合，行运与用神无情，反与忌神结党。</p>
+        <p>身旺而克泄全无，身弱而印绶太重，用印而财星坏印，无印而重叠食伤。</p>
+        <p>金寒水冷而土湿，火炎土燥而木枯。</p>
+        <p>八字衰弱又见三刑六冲者大凶。日干衰弱，官杀旺相，制官杀的食伤也旺相，大凶。</p>
+      </div>
+
+      <h4>危险大运判断</h4>
+      <div class="indent">
+        <p>1. 身强比劫多无印无官杀，取财为用 → 临冠帝旺运或财星死墓绝运危险。</p>
+        <p>2. 身强比劫多无印，取官杀为用 → 比劫临冠帝旺运或官杀死墓绝运危险。</p>
+        <p>3. 身强印多，取财为用 → 比劫临冠帝旺和印旺运危险。</p>
+        <p>4. 印多日主无根 → 日主长生运最危险。</p>
+        <p>5. 身强印多少财，食伤为用 → 印枭旺运最危险。</p>
+        <p>6. 身弱官杀多无印 → 官杀旺运和日主死墓绝运最危险。</p>
+        <p>7. 化气有余 → 行化神运或生助化神运最危险。</p>
+        <p>8. 身弱财多无比劫 → 财旺运和日主死墓绝运最危险。</p>
+        <p>9. 从格命局 → 行克泄耗所从五行运最危险。</p>
+        <p>10. 四柱天克地冲日柱年柱 → 行犯天克地冲运最危险。</p>
+      </div>
+
+      <h4>凶运中找凶年</h4>
+      <div class="indent">
+        <p>弱命大运通死地 → 死死、死墓、死绝之年。</p>
+        <p>弱命大运遇墓地 → 墓死、墓墓、墓绝之年。</p>
+        <p>弱命大运遇绝地 → 绝死、绝墓、绝绝之年。</p>
+        <p>强命大运遇帝旺 → 旺旺、旺禄、旺生之年。</p>
+        <p>强命大运遇禄地 → 禄旺、禄禄、禄生之年。</p>
+        <p>强命大运遇长生 → 生旺、生禄、生生之年。</p>
+        <p>吉利大运中因刑冲害使某五行突变的流年也凶险。</p>
+        <p>仇运中凶神劫煞元辰遇两个以上该年为凶。</p>
+        <p>危险运交运之年和脱运之年往往最凶。</p>
+      </div>
+
+      <h4>特殊格局口诀</h4>
+      <div class="indent">
+        <p style="color:var(--earth)">从财从杀运忽挂根，不肯从弃一命归仙。</p>
+        <p>阳火无根水乡必忌，阴火无根水乡必救。</p>
+        <p>财逢劫尽、重财破印、劫重见财，皆为死运。</p>
+        <p>八字一片燥气不见湿土和水，遇水运必死。</p>
+        <p>金白水清切忌夏生，火伤土制请题铭志。</p>
+        <p>木火交辉金水伤坏，运行西北死期即到。</p>
+        <p>活木忌埋根之铁：寅卯未为活木之根，遇申酉丑则根被拔去。</p>
+        <p>五行生死：遇生怕死，既死怕生；逢旺处生则死处灭，逢死处生必旺处脱。</p>
+      </div>
+
+      <h3>四、看寿命与生死</h3>
       <p>1. 日主是否得地得气，太旺无泻、太弱无生。</p>
       <p>2. 再找忌神大运，用神或相神被破坏，或某一五行失衡。</p>
       <p>3. 确定风险流年：旺而逢生，弱而被克泄。</p>
       <p>4. 确定风险真实性：三空相会秘诀验证。</p>
 
-      <h3>三、定格局</h3>
+      <h3>五、定格局</h3>
       <p>成象：一气专旺、两神成像、化气格等</p>
       <p>全形：建禄阳刃格</p>
       <p>得局：三合三会成势</p>
       <p>取格：四正四生月本气不受损，本气立格，杂气月透干会支立格。</p>
       <p style="color:var(--gold);margin-top:8px">格是人的局限性，某种格就是某一种人；局是人的扩张性，成三合霸道，三会王道。</p>
 
-      <h3>四、定格局高下</h3>
+      <h3>六、定格局高下</h3>
       <h4>（一）帝王格局</h4>
       <div class="indent">
         <p>1. 天道得助（天干日主有生助）</p>
@@ -266,7 +401,7 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
       <h4>（六）普通人</h4>
       <p class="indent">格局破损或无格可取，普通人论财官不论格局。</p>
 
-      <h3>五、定财富等级</h3>
+      <h3>七、定财富等级</h3>
       <h4>（一）顶级富豪</h4>
       <p class="indent">伤官生财格 / 全局流通到财星 / 命局带库(月令最佳) / 生于戌月更佳 / 二十年以上佳运</p>
       <h4>（二）大富 → 财旺伤官相生，命中带库，十年以上好运</h4>
@@ -277,24 +412,27 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
       <h4>（七）贫困 → 财星为忌神且大运再走忌神运，或身旺无依</h4>
       <p style="color:var(--gold);margin-top:8px">伤官格佩印主贵，生财主富。</p>
 
-      <h3>六、看婚姻</h3>
+      <h3>八、看婚姻</h3>
       <p>看星与宫位，男命看财星，女命看官杀，日支为婚姻宫。宫位助格局即好婚姻。食伤多不在意规则，比劫多性格自我。婚姻对象年龄：食伤财多比自己小，官印重比自己大。</p>
 
-      <h3>七、看子女</h3>
+      <h3>九、看子女</h3>
       <p>时支为子女宫。女性以食伤为子女，男性以官杀为子女。星为格神或相神，孩子有出息。宫位对日主的作用看关系好坏。</p>
 
-      <h3>八、看老年运</h3>
+      <h3>十、看老年运</h3>
       <p>健康：大运冲提纲阶段需留意；老年行旺运需留意。</p>
       <p>破局：需分清是损财还是命局破损而寿终。</p>
+      <p style="color:var(--gold);margin-top:4px">旺气及身而止，50岁以后又行旺运者，短寿之命 — 此为老年行运最重要的警示。</p>
 
       <h3>命理本质</h3>
       <p style="color:var(--gold)">人之富贵层次取决于天时、地利与人和。格局高下取决于能量级别与流通程度。寿夭取决于日主旺衰、流通与五行中和。六亲关系取决于命局中十神的有情和无情。</p>
+      <p style="color:var(--gold);margin-top:8px">生辰八字所揭示的是先天能量配置与天地周期的共振模式。它展示的是趋势与概率，而非铁板钉钉的定数。后天的修养、环境、选择，都在不断重塑生命的轨迹。知命者，方能善用命。</p>
     </div>
   </div>
 
   <div class="footer">
-    本工具基于古法命理推演，仅供学术研究与娱乐参考<br>
-    命理预测不能替代现代医学，请理性看待
+    命理揭示的是能量波动的趋势，而非不可逆转的宿命<br>
+    知命者不畏命，善行者自通达 · 仅供学术研究与参考<br>
+    <span style="color:var(--gold);letter-spacing:2px">人生一世，草木一秋 — 知四季者，方可超四季</span>
   </div>
 </div>
 
@@ -766,6 +904,467 @@ function getResolution(severity) {
   return resolutions[severity.level];
 }
 
+// ==================== 十神计算 ====================
+
+function getTenGod(dayStem, targetStem) {
+  const dayEl = STEM_EL[dayStem];
+  const tgtEl = STEM_EL[targetStem];
+  const samePolarity = IS_YANG[dayStem] === IS_YANG[targetStem];
+  if (tgtEl === dayEl) return samePolarity ? '比肩' : '劫财';
+  if (tgtEl === GENERATES[dayEl]) return samePolarity ? '食神' : '伤官';
+  if (tgtEl === CONTROLS[dayEl]) return samePolarity ? '偏财' : '正财';
+  if (tgtEl === CTRL_BY[dayEl]) return samePolarity ? '七杀' : '正官';
+  if (tgtEl === GEN_BY[dayEl]) return samePolarity ? '偏印' : '正印';
+  return '比肩';
+}
+
+function getTenGodClass(god, godInfo) {
+  const dayEl = godInfo.dayElement;
+  if (god === '食神' || god === '伤官') return 'god-longevity';
+  const isStrong = godInfo.isStrong;
+  // 身强: 克泄耗为喜; 身弱: 生扶为喜
+  if (isStrong) {
+    if (['正官','七杀','正财','偏财','食神','伤官'].includes(god)) return 'god-good';
+    return 'god-bad';
+  } else {
+    if (['正印','偏印','比肩','劫财'].includes(god)) return 'god-good';
+    return 'god-bad';
+  }
+}
+
+// ==================== 寿元分析 ====================
+
+function analyzeLongevity(pillars, godInfo) {
+  const dayStem = pillars.day.stem;
+  const dayEl = godInfo.dayElement;
+  const isStrong = godInfo.isStrong;
+  const positives = [];
+  const negatives = [];
+  let score = 50;
+
+  const allStems = [pillars.year.stem, pillars.month.stem, pillars.day.stem, pillars.hour.stem];
+  const allBranches = [pillars.year.branch, pillars.month.branch, pillars.day.branch, pillars.hour.branch];
+
+  // 五行力量统计
+  const elCount = [0,0,0,0,0];
+  for (const s of allStems) elCount[STEM_EL[s]]++;
+  for (const b of allBranches) elCount[BRANCH_EL[b]]++;
+
+  // 十神统计
+  const tenGods = {};
+  for (const s of allStems) {
+    const god = getTenGod(dayStem, s);
+    tenGods[god] = (tenGods[god] || 0) + 1;
+  }
+  const hasFood = (tenGods['食神'] || 0) > 0;
+  const hasInjury = (tenGods['伤官'] || 0) > 0;
+  const hasSeal = (tenGods['正印'] || 0) + (tenGods['偏印'] || 0) > 0;
+  const hasWealth = (tenGods['正财'] || 0) + (tenGods['偏财'] || 0) > 0;
+  const hasOfficial = (tenGods['正官'] || 0) + (tenGods['七杀'] || 0) > 0;
+  const hasRob = (tenGods['比肩'] || 0) + (tenGods['劫财'] || 0) > 0;
+  const sealCount = (tenGods['正印'] || 0) + (tenGods['偏印'] || 0);
+  const robCount = (tenGods['比肩'] || 0) + (tenGods['劫财'] || 0);
+
+  // 月令支持
+  const monthEl = BRANCH_EL[pillars.month.branch];
+  const monthSupports = (monthEl === dayEl || monthEl === GEN_BY[dayEl]);
+  const dayGrowthInMonth = getGrowthStage(dayStem, pillars.month.branch);
+
+  // 贴身十神
+  const monthGod = getTenGod(dayStem, pillars.month.stem);
+  const hourGod = getTenGod(dayStem, pillars.hour.stem);
+  const dayBranchEl = BRANCH_EL[pillars.day.branch];
+
+  // ========= 高寿指标 =========
+
+  // 1. 五行中和，寒暖适中
+  const uniqueEls = elCount.filter(c => c > 0).length;
+  const maxEl = Math.max(...elCount);
+  if (uniqueEls >= 4 && maxEl <= 3) {
+    positives.push({text:'五行配置均衡，命局中和，寒暖适中', weight:15});
+    score += 15;
+  } else if (uniqueEls >= 3 && maxEl <= 4) {
+    positives.push({text:'五行配置较为平衡，命局尚可', weight:8});
+    score += 8;
+  }
+
+  // 2. 日干得时而专旺 + 食伤吐秀有力
+  if (isStrong && monthSupports && (hasFood || hasInjury)) {
+    positives.push({text:'日干得时旺相，食伤吐秀有力 — 寿元星健全，高寿之象', weight:12});
+    score += 12;
+  }
+
+  // 3. 身旺比劫多有印 + 食伤成局
+  if (isStrong && robCount >= 1 && hasSeal && (hasFood || hasInjury)) {
+    positives.push({text:'身旺比劫有印，食伤泄秀 — 旺气有出路，高寿格局', weight:10});
+    score += 10;
+  }
+
+  // 4. 身弱有根于坐下 + 印绶贴身
+  if (!isStrong && hasSeal) {
+    if (monthGod.includes('印') || hourGod.includes('印')) {
+      positives.push({text:'身弱而印绶贴身相生有情 — 遇难呈祥，绝处逢生', weight:10});
+      score += 10;
+    }
+  }
+
+  // 5. 身弱坐下有根
+  if (!isStrong) {
+    if (dayBranchEl === dayEl || dayBranchEl === GEN_BY[dayEl]) {
+      positives.push({text:'日主坐下有根，虽弱不倒 — 根基尚存', weight:8});
+      score += 8;
+    }
+  }
+
+  // 6. 身弱印+官生印+劫比为用
+  if (!isStrong && hasSeal && hasOfficial && hasRob) {
+    positives.push({text:'印绶为用，官生印，比劫助身 — 三重保护，高寿之命', weight:10});
+    score += 10;
+  }
+
+  // 7. 身旺财弱有食神扶财
+  if (isStrong && hasWealth && hasFood) {
+    positives.push({text:'身旺有财，食神泄身生财 — 精气神渊源流长', weight:8});
+    score += 8;
+  }
+
+  // 8. 八字无冲无刑
+  let clashCount = 0;
+  for (let i = 0; i < allBranches.length; i++) {
+    for (let j = i+1; j < allBranches.length; j++) {
+      if ((allBranches[i] + 6) % 12 === allBranches[j]) clashCount++;
+    }
+  }
+  if (clashCount === 0) {
+    positives.push({text:'八字干支无冲克 — 身心安泰，动荡少', weight:8});
+    score += 8;
+  }
+
+  // 9. 月令未遭日时冲
+  const monthBranch = pillars.month.branch;
+  const monthClashed = ((monthBranch + 6) % 12 === pillars.day.branch) ||
+                       ((monthBranch + 6) % 12 === pillars.hour.branch);
+  if (!monthClashed) {
+    positives.push({text:'月令未遭日时刑冲 — 身命根基稳固', weight:5});
+    score += 5;
+  }
+
+  // ========= 短寿/需注意指标 =========
+
+  // 1. 身旺而克泄全无
+  if (isStrong && !hasFood && !hasInjury && !hasWealth && !hasOfficial) {
+    negatives.push({text:'身旺而克泄全无 — 旺气无出路，壅塞为患', weight:15});
+    score -= 15;
+  }
+
+  // 2. 身弱而印绶太重
+  if (!isStrong && sealCount >= 3) {
+    negatives.push({text:'身弱而印绶太重 — 母慈灭子，过犹不及', weight:12});
+    score -= 12;
+  }
+
+  // 3. 用神不见
+  const usefulEl = godInfo.usefulGod;
+  if (elCount[usefulEl] === 0) {
+    negatives.push({text:'用神不见踪影 — 命局缺乏关键平衡力量', weight:10});
+    score -= 10;
+  }
+
+  // 4. 忌神深重
+  const badEl = godInfo.inauspiciousGod;
+  if (elCount[badEl] >= 4) {
+    negatives.push({text:'忌神深重，克害丛生 — 需大运化解', weight:10});
+    score -= 10;
+  }
+
+  // 5. 用印而财星坏印
+  if (!isStrong && hasSeal && hasWealth) {
+    const wealthCount = (tenGods['正财'] || 0) + (tenGods['偏财'] || 0);
+    if (wealthCount >= 2) {
+      negatives.push({text:'用印而财星坏印 — 财多破印，根基受损', weight:8});
+      score -= 8;
+    }
+  }
+
+  // 6. 金寒水冷
+  if (elCount[3] + elCount[4] >= 5 && elCount[1] === 0) {
+    negatives.push({text:'金寒水冷而无暖局之火 — 需补火温暖', weight:8});
+    score -= 8;
+  }
+
+  // 7. 火炎土燥
+  if (elCount[1] + elCount[2] >= 5 && elCount[4] === 0) {
+    negatives.push({text:'火炎土燥而无润局之水 — 需补水滋润', weight:8});
+    score -= 8;
+  }
+
+  // 8. 月令遭日时冲
+  if (monthClashed) {
+    negatives.push({text:'月令遭日时刑冲 — 根基动摇，身心不安', weight:8});
+    score -= 8;
+  }
+
+  // 9. 原局三刑六冲 + 身弱
+  if (!isStrong && clashCount >= 2) {
+    negatives.push({text:'八字衰弱又见多重冲克 — 波折较多，需谨慎', weight:8});
+    score -= 8;
+  }
+
+  // 10. 身弱官杀旺 + 食伤也旺
+  if (!isStrong && hasOfficial && (hasFood || hasInjury)) {
+    const officialCount = (tenGods['正官'] || 0) + (tenGods['七杀'] || 0);
+    const foodCount = (tenGods['食神'] || 0) + (tenGods['伤官'] || 0);
+    if (officialCount >= 2 && foodCount >= 1) {
+      negatives.push({text:'身弱官杀旺而食伤亦旺 — 交战不宁，需留意', weight:8});
+      score -= 8;
+    }
+  }
+
+  // 限制分值范围
+  score = Math.max(10, Math.min(95, score));
+
+  let level, levelName, levelColor, levelAdvice;
+  if (score >= 75) {
+    level = 3; levelName = '高寿之象'; levelColor = 'var(--green)';
+    levelAdvice = '命格根基深厚，寿元星健全。如同深根大树，能抵御四季风霜。保持中正平和，自然长寿康宁。';
+  } else if (score >= 55) {
+    level = 2; levelName = '中寿之象'; levelColor = 'var(--gold)';
+    levelAdvice = '命格尚可，有利有弊相互对冲。关键在于大运配合与后天调养，趋利避害，可享中上之寿。';
+  } else if (score >= 35) {
+    level = 1; levelName = '需谨慎调养'; levelColor = 'var(--earth)';
+    levelAdvice = '命格有所不足，但绝非不可化解。知其弱处，方能补其不足。积极调养身心，注意关口年份，以智慧应对。';
+  } else {
+    level = 0; levelName = '宜积极化解'; levelColor = 'var(--red2)';
+    levelAdvice = '命格偏颇较重，更需积极化解。衰老和死亡并非必然，而是能量失衡的现象。通过后天努力、趋避得当，完全可以改善。';
+  }
+
+  return { score, level, levelName, levelColor, levelAdvice, positives, negatives, tenGods, elCount, clashCount };
+}
+
+// ==================== 土星四季 ====================
+
+function getSaturnSeason(age) {
+  if (age < 30) return { name: '春', desc: '生发之季', fullDesc: '0-30岁，如草木之春，生机蓬勃，万物生发。此阶段气血充盈，生命力旺盛，如同春日之草木，向上生长。', color: 'var(--wood)', phase: 0 };
+  if (age < 60) return { name: '夏', desc: '壮盛之季', fullDesc: '30-60岁，如草木之夏，枝繁叶茂，能量充沛。此阶段事业鼎盛，但也开始经历第一次重大能量波动。', color: 'var(--fire)', phase: 1 };
+  if (age < 90) return { name: '秋', desc: '收敛之季', fullDesc: '60-90岁，如草木之秋，果实累累，渐趋收敛。此阶段能量转向内收，如能善养，可积蓄力量以度严冬。', color: 'var(--metal)', phase: 2 };
+  return { name: '冬', desc: '归藏之季', fullDesc: '90-120岁，如草木之冬，万物归藏。此为最关键阶段——若能安然度过，理论上将迎来「木质化跃升」，突破生命周期的限制。', color: 'var(--water)', phase: 3 };
+}
+
+// ==================== 渲染：寿元评估 ====================
+
+function renderLongevity(longevityInfo, birthYear) {
+  const container = document.getElementById('longevityDisplay');
+  const currentAge = new Date().getFullYear() - birthYear;
+  const season = getSaturnSeason(currentAge);
+
+  let html = '';
+
+  // 寿元评分 + 当前季节
+  html += '<div class="longevity-overview">';
+  html += `<div class="longevity-score-card">
+    <div class="longevity-score-num" style="color:${longevityInfo.levelColor}">${longevityInfo.score}</div>
+    <div class="longevity-score-label">寿元分值</div>
+  </div>`;
+  html += `<div class="longevity-score-card">
+    <div class="longevity-score-num" style="color:${longevityInfo.levelColor}">${longevityInfo.levelName}</div>
+    <div class="longevity-score-label">命格评估</div>
+  </div>`;
+  html += `<div class="longevity-score-card">
+    <div class="longevity-score-num" style="color:${season.color}">人生之${season.name}</div>
+    <div class="longevity-score-label">当前${currentAge}岁 · ${season.desc}</div>
+  </div>`;
+  html += '</div>';
+
+  // 土星四季条
+  html += '<div style="margin:20px 0">';
+  html += '<div style="text-align:center;font-size:12px;color:var(--dim);margin-bottom:8px;letter-spacing:2px">人 之 四 季 · 土星绕日周期 · 120年一轮回</div>';
+  html += '<div class="saturn-bar">';
+  const phases = [
+    { name: '春', age: '0-30', cls: 'saturn-spring' },
+    { name: '夏', age: '30-60', cls: 'saturn-summer' },
+    { name: '秋', age: '60-90', cls: 'saturn-autumn' },
+    { name: '冬', age: '90-120', cls: 'saturn-winter' }
+  ];
+  phases.forEach((p, i) => {
+    const isCurrent = season.phase === i;
+    html += `<div class="saturn-phase ${p.cls} ${isCurrent ? 'current' : ''}">
+      <span class="phase-label">${p.name}</span>
+      <span class="phase-age">${p.age}岁</span>
+    </div>`;
+  });
+  html += '</div>';
+  html += `<div class="saturn-note">${season.fullDesc}</div>`;
+  html += '</div>';
+
+  // 寿元建议
+  html += `<div class="philosophy-card">
+    <h4>寿元评语</h4>
+    <p>${longevityInfo.levelAdvice}</p>
+  </div>`;
+
+  // 正面指标
+  if (longevityInfo.positives.length > 0) {
+    html += '<div class="longevity-indicators">';
+    html += '<div style="font-size:12px;color:var(--green);margin-bottom:6px;letter-spacing:2px">有利因素</div>';
+    longevityInfo.positives.forEach(p => {
+      html += `<div class="longevity-indicator indicator-positive">
+        <span class="indicator-icon">+</span><span>${p.text}</span>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  // 负面指标
+  if (longevityInfo.negatives.length > 0) {
+    html += '<div class="longevity-indicators" style="margin-top:12px">';
+    html += '<div style="font-size:12px;color:var(--red2);margin-bottom:6px;letter-spacing:2px">需注意因素</div>';
+    longevityInfo.negatives.forEach(n => {
+      html += `<div class="longevity-indicator indicator-negative">
+        <span class="indicator-icon">!</span><span>${n.text}</span>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  // 十神分布
+  html += '<div style="margin-top:16px;text-align:center">';
+  html += '<div style="font-size:12px;color:var(--dim);margin-bottom:8px;letter-spacing:2px">命局十神分布</div>';
+  html += '<div class="tengod-row">';
+  const _p = analysisData.pillars;
+  const allStems2 = [_p.year.stem, _p.month.stem, _p.day.stem, _p.hour.stem];
+  const pillarNames = ['年','月','日','时'];
+  allStems2.forEach((s, i) => {
+    const god = i === 2 ? '日主' : getTenGod(_p.day.stem, s);
+    const cls = i === 2 ? '' : getTenGodClass(god, analysisData.godInfo);
+    const isLongevity = (god === '食神' || god === '伤官');
+    html += `<div class="tengod-tag ${cls}">${pillarNames[i]}:${god}${isLongevity ? '(寿元)' : ''}</div>`;
+  });
+  html += '</div></div>';
+
+  // 价值观引导
+  html += `<div class="value-box">
+    <h4>如何理解寿元评估</h4>
+    <p>寿元分值反映的是先天命格中五行平衡度与寿元星的健全程度，它展示的是<b style="color:var(--water)">趋势而非定数</b>。
+    就像天气预报告诉你明天可能下雨，你便可以带伞出门 — 知道自身命格的强弱之处，便能有针对性地调养身心。<br>
+    分值高者不可恃强而骄，分值低者不必忧心忡忡。<b style="color:var(--water)">后天的修养、运势的配合、生活方式的选择</b>，都能深刻影响最终的生命质量与长度。</p>
+  </div>`;
+
+  container.innerHTML = html;
+}
+
+// ==================== 渲染：天道观 ====================
+
+function renderPhilosophy(birthYear) {
+  const container = document.getElementById('philosophyDisplay');
+  const section = document.getElementById('philosophySection');
+  section.style.display = 'block';
+
+  let html = '';
+
+  // 核心天道观
+  html += `<div class="philosophy-card">
+    <h4>人为什么是百年之寿？</h4>
+    <p>「离离原上草，一岁一枯荣」— 草的枯荣与四季关联，四季因地球绕日而生。能量的周期性波动超过草本植物的结构稳定范围，故北风起而百草折。</p>
+    <p>但一旦扛过一个四季，结构强度大幅提升，<span class="hl">一跃而成为木本植物</span>，生命的长度就大幅延长了。</p>
+  </div>`;
+
+  html += `<div class="philosophy-card">
+    <h4>人类的「四季」是什么？</h4>
+    <p>太阳系被周期性统治。除地球绕日周期外，其它行星无一不具周期性。所有生物，既被地球恒星年所影响，绝无不被其它行星周期影响之理。</p>
+    <p>人类的「四季」，就是<span class="hl">土星的绕日周期</span>。土星三十年绕日一周，四个三十年，就是人类的春夏秋冬。大约120年五星回归原位，完成一个完整循环。</p>
+    <div class="philosophy-quote">人体受气于天，在出生的那一刻形成某种模式。这个内模式与外天地的能量波动互相作用，120年间，总会遇上某个点，超过自身结构的稳定性，于是人生到此为止。<br>「人生一世，草木一秋」— 真不易之言也。</div>
+  </div>`;
+
+  html += `<div class="philosophy-card">
+    <h4>衰老是必然的吗？</h4>
+    <p><span class="hl">未必。</span>衰老只是内模式偏离平衡点的现象。死亡只是自身结构崩溃的现象。</p>
+    <p>端粒缩短、细胞癌变、基因崩坏，只是现象而非本质。人类并不是因为这些原因衰老和死亡 — 这些都是人类经历四季过程中的花落叶黄现象。影响人类生老病死的，从来都是<span class="hl">外天地的周期运动</span>。</p>
+    <p>树木到下一个季节轮回，就会再次抽枝发芽。灯塔水母能周期性返回幼体。可见只要跨越了四季，理论上生命就有返老还童的机会。</p>
+    <div class="philosophy-quote">如果能够越过第一个四季，必然有木质化的跃升。理论上，维持生命的能量源是太阳，只要能够维持结构不崩溃，本来就应该与天地同在。<br><b style="color:var(--gold)">长生，从来都不仅仅是幻想。</b></div>
+  </div>`;
+
+  html += `<div class="philosophy-card">
+    <h4>命法天关的意义</h4>
+    <p>既然知道了人之生死关口源于天地周期与个人内模式的共振，<span class="hl">预知便是最大的武器</span>。</p>
+    <p>就如同知道冬天要来，便提前储备粮草、加固房屋。命法天关所做的，就是帮你看清生命中那些「结构可能被考验的时刻」。</p>
+    <p>知命者不畏命。看到关口不是为了恐惧，而是为了<span class="hl">以智慧和准备去超越它</span>。</p>
+  </div>`;
+
+  container.innerHTML = html;
+}
+
+// ==================== 年份增强解读 ====================
+
+function getYearNarrative(r, godInfo, pillars) {
+  const dayEl = godInfo.dayElement;
+  const season = getSaturnSeason(r.age);
+  const yStemEl = STEM_EL[r.yearStem];
+  const yBranchEl = BRANCH_EL[r.yearBranch];
+  const yearGod = getTenGod(pillars.day.stem, r.yearStem);
+
+  let narrative = '';
+
+  // 土星季节上下文
+  narrative += `<div class="year-context">`;
+  narrative += `<span class="ctx-label">天道周期: </span>此年处于人生之<b style="color:${season.color}">${season.name}</b>（${season.desc}），`;
+
+  if (r.age < 30) {
+    narrative += '生命力蓬勃，结构尚在成长。';
+  } else if (r.age < 60) {
+    narrative += '能量充沛但波动开始显现，留意五行失衡。';
+  } else if (r.age < 90) {
+    narrative += '能量渐趋收敛，保养为重。';
+  } else {
+    narrative += '进入归藏之季，此为四季之冬。若能安然度过，有跃升之机。';
+  }
+  narrative += '</div>';
+
+  // 流年十神解读
+  narrative += `<div class="year-context" style="margin-top:8px">`;
+  narrative += `<span class="ctx-label">流年能量: </span>`;
+  narrative += `${r.year}年天干${STEMS[r.yearStem]}为<b>${yearGod}</b>，`;
+
+  if (yearGod === '食神' || yearGod === '伤官') {
+    narrative += '食伤之年，利于表达与创造，寿元星活跃。';
+  } else if (yearGod === '正印' || yearGod === '偏印') {
+    narrative += '印绶之年，利于学习与被庇护，有贵人相助之象。';
+  } else if (yearGod === '正官' || yearGod === '七杀') {
+    narrative += '官杀之年，外部压力增大，需注意身体与事业压力。';
+  } else if (yearGod === '正财' || yearGod === '偏财') {
+    narrative += '财星之年，精力消耗于外事，注意量力而行。';
+  } else if (yearGod === '比肩' || yearGod === '劫财') {
+    narrative += '比劫之年，同辈竞争激烈，但自身力量也有增益。';
+  }
+  narrative += '</div>';
+
+  // 根据危险程度给出不同引导
+  if (r.isCrisis) {
+    narrative += `<div class="guidance-section" style="background:rgba(231,76,60,.04);border-color:rgba(231,76,60,.15)">`;
+    narrative += `<h4 style="color:var(--red2)">关口年份提示</h4>`;
+    narrative += `<div class="guidance-item">此年天地能量波动与你的内模式形成强烈共振，结构稳定性面临考验</div>`;
+    narrative += `<div class="guidance-item">提前半年开始调养身心，减少高风险活动</div>`;
+    narrative += `<div class="guidance-item">注意补充用神五行（${ELEMENTS[godInfo.usefulGod]}），穿戴相应颜色</div>`;
+    narrative += `<div class="guidance-item">保持情绪平稳，避免大悲大喜 — 情绪剧烈波动最伤结构稳定</div>`;
+    narrative += `<div class="guidance-item">关口不等于终点 — 每一个关口都是结构升级的契机。扛过去，便是跃升</div>`;
+    narrative += `</div>`;
+  } else if (r.danger >= 1) {
+    narrative += `<div class="guidance-section">`;
+    narrative += `<h4>流年不利提示</h4>`;
+    narrative += `<div class="guidance-item">此年五行有所偏颇，需注意身体保养</div>`;
+    narrative += `<div class="guidance-item">适当补充${ELEMENTS[godInfo.usefulGod]}行能量（颜色、方位、饮食）</div>`;
+    narrative += `<div class="guidance-item">虽有不利因素，但棺材盖不成立，不构成真正的生死关口</div>`;
+    narrative += `</div>`;
+  } else {
+    narrative += `<div class="guidance-section">`;
+    narrative += `<h4>平安年份</h4>`;
+    narrative += `<div class="guidance-item">此年天地能量与你的内模式和谐，可放心发展</div>`;
+    narrative += `<div class="guidance-item">平安之年正是积蓄力量的好时机，为将来可能的关口做准备</div>`;
+    narrative += `</div>`;
+  }
+
+  return narrative;
+}
+
 // ==================== 主推演引擎 ====================
 
 let analysisData = null;
@@ -774,7 +1373,7 @@ let currentDecade = 0;
 function analyzeAllYears(pillars, godInfo, birthYear, birthMonth, birthDay) {
   const results = [];
   const startYear = birthYear;
-  const endYear = birthYear + 100;
+  const endYear = birthYear + 120; // 土星四季完整周期
 
   for (let y = startYear; y <= endYear; y++) {
     const yearStem = ((y - 4) % 10 + 10) % 10;
@@ -858,7 +1457,7 @@ function startPrediction() {
   const loadingStep = document.getElementById('loadingStep');
   loading.classList.remove('hide');
 
-  const steps = ['排列四柱...', '推算用神忌神...', '查三空分布...', '定棺材底...', '合棺材盖...', '断生死关口...'];
+  const steps = ['排列四柱...', '推算用神忌神...', '十神寿元分析...', '查三空分布...', '定棺材底...', '合棺材盖...', '寿夭评估...', '天道周期推演...', '断生死关口...'];
   let stepIdx = 0;
   const stepInterval = setInterval(() => {
     stepIdx++;
@@ -871,12 +1470,15 @@ function startPrediction() {
       const pillars = calculateFourPillars(year, month, day, hour);
       const godInfo = determineUsefulGod(pillars);
       const results = analyzeAllYears(pillars, godInfo, year, month, day);
-      analysisData = { pillars, godInfo, results, birthYear: year };
+      const longevityInfo = analyzeLongevity(pillars, godInfo);
+      analysisData = { pillars, godInfo, results, birthYear: year, longevityInfo };
 
       renderPillars(pillars, godInfo);
       renderGodInfo(godInfo);
+      renderLongevity(longevityInfo, year);
       renderTimeline(results, year);
-      renderStats(results);
+      renderStats(results, longevityInfo);
+      renderPhilosophy(year);
 
       document.getElementById('results').style.display = 'block';
       setTimeout(() => {
@@ -1088,19 +1690,23 @@ function showDetail(year) {
     }
   }
 
+  // 增强叙事解读
+  html += getYearNarrative(r, analysisData.godInfo, analysisData.pillars);
+
   html += `</div>`;
   panel.innerHTML = html;
 }
 
-function renderStats(results) {
+function renderStats(results, longevityInfo) {
   const container = document.getElementById('statsDisplay');
   const crisisYears = results.filter(r => r.isCrisis);
   const warnYears = results.filter(r => r.danger === 1);
   const safeYears = results.filter(r => r.danger === 0);
+  const totalYears = results.length;
 
   container.innerHTML = `
     <div class="stat-card stat-safe">
-      <div class="stat-num">${safeYears.length}</div>
+      <div class="stat-num">${safeYears.length}<span style="font-size:14px;color:var(--dim)">/${totalYears}</span></div>
       <div class="stat-label">平安之年</div>
     </div>
     <div class="stat-card stat-warn">
@@ -1128,6 +1734,23 @@ function renderStats(results) {
     });
     detail += '</div></div>';
     container.innerHTML += detail;
+  }
+
+  // 寿元总结
+  if (longevityInfo) {
+    let summary = '<div style="margin-top:16px;padding:16px;background:rgba(212,168,75,.04);border:1px solid rgba(212,168,75,.12);border-radius:6px">';
+    summary += '<div style="color:var(--gold);margin-bottom:8px;font-size:13px;letter-spacing:2px">寿元综述</div>';
+    summary += `<div style="font-size:13px;line-height:2;color:var(--dim)">`;
+    summary += `120年推演中，平安年份占比 <b style="color:var(--green)">${(safeYears.length/totalYears*100).toFixed(0)}%</b>。`;
+    if (crisisYears.length > 0) {
+      summary += `共检出 ${crisisYears.length} 个生死关口，均为天地能量波动与命主内模式共振的关键节点。`;
+      summary += `<br>关口并非宿命的终点 — <b style="color:var(--gold)">知其所在，便能趋避。如同知道冬天要来，便提前加固房屋。</b>`;
+    } else {
+      summary += `<b style="color:var(--green)">未检出严重生死关口</b>，命格结构稳定性较好。`;
+    }
+    summary += `<br>衰老与死亡，本质上是外天地周期运动超过自身结构稳定范围的现象。保持五行平衡、身心中和，便是最好的「长生之术」。`;
+    summary += '</div></div>';
+    container.innerHTML += summary;
   }
 }
 
