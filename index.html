@@ -962,13 +962,19 @@ function renderStats(results) {
   `;
 
   if (crisisYears.length > 0) {
-    let detail = '<div style="margin-top:16px;padding:12px;background:rgba(231,76,60,.05);border:1px solid rgba(231,76,60,.15);border-radius:6px">';
-    detail += '<div style="color:var(--red2);margin-bottom:8px;font-size:13px">生死关口年份:</div>';
+    let detail = '<div style="margin-top:16px;padding:16px;background:rgba(231,76,60,.05);border:1px solid rgba(231,76,60,.15);border-radius:6px">';
+    detail += '<div style="color:var(--red2);margin-bottom:12px;font-size:13px">生死关口年份:</div>';
+    detail += '<div style="display:flex;flex-direction:column;gap:8px">';
     crisisYears.forEach(r => {
       const sev = r.severity;
-      detail += `<span class="tag tag-crisis" style="cursor:pointer;margin:2px" onclick="jumpToYear(${r.year})">${r.year}年(${r.age}岁) ${sev ? sev.name : ''}</span> `;
+      const sevColor = sev && sev.level === 3 ? 'var(--red2)' : sev && sev.level === 2 ? 'var(--earth)' : '#e67e22';
+      detail += `<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(0,0,0,.25);border-radius:4px;border-left:3px solid ${sevColor};cursor:pointer" onclick="jumpToYear(${r.year})">
+        <span style="color:${sevColor};font-size:16px;font-weight:bold;min-width:60px">${sev ? sev.name : '关口'}</span>
+        <span style="color:var(--text);font-size:14px">${r.year}年</span>
+        <span style="color:var(--dim);font-size:13px">${r.age}岁 · ${r.yearGanZhi}年</span>
+      </div>`;
     });
-    detail += '</div>';
+    detail += '</div></div>';
     container.innerHTML += detail;
   }
 }
