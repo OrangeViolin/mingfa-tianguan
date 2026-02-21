@@ -105,6 +105,19 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
 .stat-warn .stat-num{color:var(--earth)}
 .stat-danger .stat-num{color:var(--red2)}
 
+/* ===== 学理参考 ===== */
+.ref-section{background:var(--card);border:1px solid var(--border);border-radius:8px;margin:20px 0;overflow:hidden}
+.ref-toggle{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;cursor:pointer;color:var(--gold);font-size:15px;letter-spacing:4px;transition:background .3s}
+.ref-toggle:hover{background:rgba(212,168,75,.05)}
+.ref-toggle .arrow{transition:transform .3s;font-size:12px}
+.ref-toggle .arrow.open{transform:rotate(180deg)}
+.ref-content{display:none;padding:0 24px 24px;font-size:13px;line-height:2.2;color:var(--dim)}
+.ref-content.show{display:block}
+.ref-content h3{color:var(--gold);font-size:14px;margin:20px 0 8px;letter-spacing:3px;font-weight:normal;border-bottom:1px solid var(--border);padding-bottom:4px}
+.ref-content h4{color:var(--text);font-size:13px;margin:12px 0 4px}
+.ref-content p{margin:4px 0}
+.ref-content .indent{padding-left:16px}
+
 /* ===== 加载动画 ===== */
 .loading-overlay{position:fixed;inset:0;background:rgba(10,10,15,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;transition:opacity .5s}
 .loading-overlay.hide{opacity:0;pointer-events:none}
@@ -141,7 +154,7 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
   <div class="title-section">
     <div class="taiji">☯</div>
     <h1>命法天关</h1>
-    <div class="subtitle">生死关口推演系统 · 基于王一禅秘法</div>
+    <div class="subtitle">生死关口推演系统 · 古法三空秘诀</div>
   </div>
 
   <!-- 输入区 -->
@@ -210,8 +223,77 @@ h1{font-size:32px;color:var(--gold);letter-spacing:12px;font-weight:normal;margi
     </div>
   </div>
 
+  <!-- 学理参考 -->
+  <div class="ref-section">
+    <div class="ref-toggle" onclick="toggleRef()">
+      <span>命 理 学 理 参 考</span>
+      <span class="arrow" id="refArrow">▼</span>
+    </div>
+    <div class="ref-content" id="refContent">
+      <h3>一、论命程序</h3>
+      <p>（一）看寿命 →（二）定格局 →（三）定格局高下 →（四）定财富等级 →（五）看婚姻 →（六）看子女 →（七）看老年运</p>
+
+      <h3>二、看寿命与生死</h3>
+      <p>1. 日主是否得地得气，太旺无泻、太弱无生。</p>
+      <p>2. 再找忌神大运，用神或相神被破坏，或某一五行失衡。</p>
+      <p>3. 确定风险流年：旺而逢生，弱而被克泄。</p>
+      <p>4. 确定风险真实性：三空相会秘诀验证。</p>
+
+      <h3>三、定格局</h3>
+      <p>成象：一气专旺、两神成像、化气格等</p>
+      <p>全形：建禄阳刃格</p>
+      <p>得局：三合三会成势</p>
+      <p>取格：四正四生月本气不受损，本气立格，杂气月透干会支立格。</p>
+      <p style="color:var(--gold);margin-top:8px">格是人的局限性，某种格就是某一种人；局是人的扩张性，成三合霸道，三会王道。</p>
+
+      <h3>四、定格局高下</h3>
+      <h4>（一）帝王格局</h4>
+      <div class="indent">
+        <p>1. 天道得助（天干日主有生助）</p>
+        <p>2. 地道得局（地支成三会三合局）</p>
+        <p>3. 人道和合（十神配合成贵格）</p>
+        <p>4. 时空共振（大运配合无悖逆）</p>
+        <p>5. 杀伤得用（伤官七杀成格局）</p>
+      </div>
+      <h4>（二）将相格局</h4>
+      <p class="indent">天地略有不足，非伤杀得用，十神配合得宜构成贵格，大运配合。吉神成格为相，杀刃成格为将。典型：财官印三奇。</p>
+      <h4>（三）州府格局</h4>
+      <p class="indent">财官印三奇缺一而成格，或凶神成格而天地人略有不清或力量不平衡。</p>
+      <h4>（四）县处格局</h4>
+      <p class="indent">轻重不足或略有瑕疵，需逢大运去掉格中之病以成就格局。</p>
+      <h4>（五）一般吏员</h4>
+      <p class="indent">命局以官印为用而略有格局，有忌神存在，或格多不清。</p>
+      <h4>（六）普通人</h4>
+      <p class="indent">格局破损或无格可取，普通人论财官不论格局。</p>
+
+      <h3>五、定财富等级</h3>
+      <h4>（一）顶级富豪</h4>
+      <p class="indent">伤官生财格 / 全局流通到财星 / 命局带库(月令最佳) / 生于戌月更佳 / 二十年以上佳运</p>
+      <h4>（二）大富 → 财旺伤官相生，命中带库，十年以上好运</h4>
+      <h4>（三）富裕 → 财官格、食神生财格、地支成财局</h4>
+      <h4>（四）中产 → 财星可用但根气弱，食神生财而格局不清</h4>
+      <h4>（五）工薪 → 命中有财星可用，未成格局</h4>
+      <h4>（六）劳禄 → 财太旺而身弱，比劫分财或以比劫取财</h4>
+      <h4>（七）贫困 → 财星为忌神且大运再走忌神运，或身旺无依</h4>
+      <p style="color:var(--gold);margin-top:8px">伤官格佩印主贵，生财主富。</p>
+
+      <h3>六、看婚姻</h3>
+      <p>看星与宫位，男命看财星，女命看官杀，日支为婚姻宫。宫位助格局即好婚姻。食伤多不在意规则，比劫多性格自我。婚姻对象年龄：食伤财多比自己小，官印重比自己大。</p>
+
+      <h3>七、看子女</h3>
+      <p>时支为子女宫。女性以食伤为子女，男性以官杀为子女。星为格神或相神，孩子有出息。宫位对日主的作用看关系好坏。</p>
+
+      <h3>八、看老年运</h3>
+      <p>健康：大运冲提纲阶段需留意；老年行旺运需留意。</p>
+      <p>破局：需分清是损财还是命局破损而寿终。</p>
+
+      <h3>命理本质</h3>
+      <p style="color:var(--gold)">人之富贵层次取决于天时、地利与人和。格局高下取决于能量级别与流通程度。寿夭取决于日主旺衰、流通与五行中和。六亲关系取决于命局中十神的有情和无情。</p>
+    </div>
+  </div>
+
   <div class="footer">
-    本工具基于王一禅《命法天关》古法推演，仅供学术研究与娱乐参考<br>
+    本工具基于古法命理推演，仅供学术研究与娱乐参考<br>
     命理预测不能替代现代医学，请理性看待
   </div>
 </div>
@@ -234,20 +316,34 @@ const EL_CLASS = ['el-wood','el-fire','el-earth','el-metal','el-water'];
 const BG_CLASS = ['bg-wood','bg-fire','bg-earth','bg-metal','bg-water'];
 
 // 五行生克: 木0火1土2金3水4
-// 生: 木→火→土→金→水→木
 const GENERATES = [1,2,3,4,0];
-// 克: 木→土, 火→金, 土→水, 金→木, 水→火
 const CONTROLS = [2,3,4,0,1];
-// 被生: 木←水, 火←木, 土←火, 金←土, 水←金
 const GEN_BY = [4,0,1,2,3];
-// 被克: 木←金, 火←水, 土←木, 金←火, 水←土
 const CTRL_BY = [3,4,0,1,2];
 
 const SHENG_XIAO = ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'];
 
+// 十二长生
+const GROWTH_STAGES = ['长生','沐浴','冠带','临官','帝旺','衰','病','死','墓','绝','胎','养'];
+const GROWTH_START = [11,6,2,9,2,9,5,0,8,3]; // 各天干长生起始地支
+const IS_YANG = [true,false,true,false,true,false,true,false,true,false];
+
+// 三合三会
+const SAN_HE = [[8,0,4],[11,3,7],[2,6,10],[5,9,1]]; // 申子辰 亥卯未 寅午戌 巳酉丑
+const SAN_HUI = [[2,3,4],[5,6,7],[8,9,10],[11,0,1]]; // 寅卯辰 巳午未 申酉戌 亥子丑
+
+// 追铲对照表 (游魂空亡核心)
+// "追铲对冲是游魂" — 追魂与铲度必须同现且为六冲关系
+const ZHUI_CHAN = [
+  {zhui:[7,8], chan:[1,2]},   // 甲己: 未申追丑寅
+  {zhui:[3,4], chan:[9,10]},  // 乙庚: 卯辰追酉戌
+  {zhui:[1,2], chan:[7,8]},   // 丙辛: 丑寅铲未申
+  {zhui:[11,0], chan:[5,6]},  // 丁壬: 亥子追巳午
+  {zhui:[9,10], chan:[3,4]}   // 戊癸: 酉戌铲卯辰
+];
+
 // ==================== 历法引擎 ====================
 
-// 儒略日数 (JDN)
 function getJDN(y, m, d) {
   if (m <= 2) { y--; m += 12; }
   const A = Math.floor(y / 100);
@@ -255,61 +351,43 @@ function getJDN(y, m, d) {
   return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
 }
 
-// 日干支 (基于已知参考日校准)
-// 参考: 使用 JDN 偏移量来计算六十甲子序号
 function getDayStemBranch(y, m, d) {
-  const jdn = Math.floor(getJDN(y, m, d) + 0.5); // 取整修正
-  // 校准: 通过模运算得到六十甲子序号
+  const jdn = Math.floor(getJDN(y, m, d) + 0.5);
   const cycle = ((jdn + 49) % 60 + 60) % 60;
   return { stem: cycle % 10, branch: cycle % 12 };
 }
 
 // ==================== 四柱计算 ====================
 
-// 节气日期(近似值, 用于判断月令)
 function getSolarTermDay(m) {
-  // 返回每个月令起始的大约日期
   const terms = [
-    [2, 4],   // 寅月: 立春
-    [3, 6],   // 卯月: 惊蛰
-    [4, 5],   // 辰月: 清明
-    [5, 6],   // 巳月: 立夏
-    [6, 6],   // 午月: 芒种
-    [7, 7],   // 未月: 小暑
-    [8, 8],   // 申月: 立秋
-    [9, 8],   // 酉月: 白露
-    [10, 8],  // 戌月: 寒露
-    [11, 7],  // 亥月: 立冬
-    [12, 7],  // 子月: 大雪
-    [1, 6],   // 丑月: 小寒
+    [2, 4],[3, 6],[4, 5],[5, 6],[6, 6],[7, 7],
+    [8, 8],[9, 8],[10, 8],[11, 7],[12, 7],[1, 6]
   ];
   return terms[m];
 }
 
 function getChineseMonthOffset(solarMonth, solarDay) {
-  // 返回月令偏移 0=寅月(正月), 1=卯月(二月), ..., 11=丑月(腊月)
   const dayNum = (m, d) => {
     const cumDays = [0,0,31,59,90,120,151,181,212,243,273,304,334];
     return cumDays[m] + d;
   };
   const target = dayNum(solarMonth, solarDay);
-
   const boundaries = [
-    { doy: dayNum(1, 6), offset: 11 },   // 小寒: 丑月
-    { doy: dayNum(2, 4), offset: 0 },    // 立春: 寅月
-    { doy: dayNum(3, 6), offset: 1 },    // 惊蛰: 卯月
-    { doy: dayNum(4, 5), offset: 2 },    // 清明: 辰月
-    { doy: dayNum(5, 6), offset: 3 },    // 立夏: 巳月
-    { doy: dayNum(6, 6), offset: 4 },    // 芒种: 午月
-    { doy: dayNum(7, 7), offset: 5 },    // 小暑: 未月
-    { doy: dayNum(8, 8), offset: 6 },    // 立秋: 申月
-    { doy: dayNum(9, 8), offset: 7 },    // 白露: 酉月
-    { doy: dayNum(10, 8), offset: 8 },   // 寒露: 戌月
-    { doy: dayNum(11, 7), offset: 9 },   // 立冬: 亥月
-    { doy: dayNum(12, 7), offset: 10 },  // 大雪: 子月
+    { doy: dayNum(1, 6), offset: 11 },
+    { doy: dayNum(2, 4), offset: 0 },
+    { doy: dayNum(3, 6), offset: 1 },
+    { doy: dayNum(4, 5), offset: 2 },
+    { doy: dayNum(5, 6), offset: 3 },
+    { doy: dayNum(6, 6), offset: 4 },
+    { doy: dayNum(7, 7), offset: 5 },
+    { doy: dayNum(8, 8), offset: 6 },
+    { doy: dayNum(9, 8), offset: 7 },
+    { doy: dayNum(10, 8), offset: 8 },
+    { doy: dayNum(11, 7), offset: 9 },
+    { doy: dayNum(12, 7), offset: 10 },
   ];
-
-  let result = 10; // 默认子月 (1月6日前)
+  let result = 10;
   for (const b of boundaries) {
     if (target >= b.doy) result = b.offset;
   }
@@ -317,26 +395,19 @@ function getChineseMonthOffset(solarMonth, solarDay) {
 }
 
 function calculateFourPillars(year, month, day, hour) {
-  // ===== 年柱 =====
   let adjustedYear = year;
-  // 立春前用上一年
   if (month < 2 || (month === 2 && day < 4)) adjustedYear--;
   const yearStem = ((adjustedYear - 4) % 10 + 10) % 10;
   const yearBranch = ((adjustedYear - 4) % 12 + 12) % 12;
 
-  // ===== 月柱 =====
   const monthOffset = getChineseMonthOffset(month, day);
-  const monthBranch = (monthOffset + 2) % 12; // 寅=2
-  // 五虎遁: 甲己丙作首, 乙庚戊为头, 丙辛庚上起, 丁壬壬位求, 戊癸甲寅始
+  const monthBranch = (monthOffset + 2) % 12;
   const monthStemStart = [2, 4, 6, 8, 0][yearStem % 5];
   const monthStem = (monthStemStart + monthOffset) % 10;
 
-  // ===== 日柱 =====
   const dayPillar = getDayStemBranch(year, month, day);
 
-  // ===== 时柱 =====
   const hourBranch = hour;
-  // 五鼠遁: 甲己甲子起, 乙庚丙子始, 丙辛戊子初, 丁壬庚子居, 戊癸壬子流
   const hourStemStart = [0, 2, 4, 6, 8][dayPillar.stem % 5];
   const hourStem = (hourStemStart + hour) % 10;
 
@@ -348,25 +419,32 @@ function calculateFourPillars(year, month, day, hour) {
   };
 }
 
-// ==================== 空亡计算 ====================
+// ==================== 空亡计算 (修正版) ====================
 
-// 旬空 (六甲空亡)
+// 旬空 (六甲空亡) — 保持不变
 function getXunVoid(stem, branch) {
   const start = ((branch - stem) % 12 + 12) % 12;
   const map = { 0:[10,11], 10:[8,9], 8:[6,7], 6:[4,5], 4:[2,3], 2:[0,1] };
   return map[start] || [];
 }
 
-// 路空 (截路空亡)
-function getPathVoid(stem) {
-  const group = stem % 5;
-  return [[8,9],[6,7],[4,5],[2,3],[0,1,10,11]][group];
+// 截路空亡 (修正): 壬癸水为天干即为截路
+// 1. 时柱带壬癸 = 命局本有截路空亡
+// 2. 流年为壬癸年 = 流年截路
+// 3. 流生为壬癸日 = 流生截路
+function isRenGui(stem) {
+  return stem === 8 || stem === 9; // 壬=8, 癸=9
 }
 
-// 魂空 (游魂空亡)
-function getSoulVoid(stem) {
+// 游魂空亡 (修正): "追铲对冲是游魂"
+// 追魂与铲度必须同现于地支中, 二者本为六冲关系
+// 看: 年干、日干、流生干 → 检查大运及流年地支是否追铲同现
+function checkZhuiChan(stem, branches) {
   const group = stem % 5;
-  return [[7,8,1,2],[3,4,9,10],[1,2,7,8],[11,0,5,6],[9,10,3,4]][group];
+  const {zhui, chan} = ZHUI_CHAN[group];
+  const hasZhui = zhui.some(b => branches.includes(b));
+  const hasChan = chan.some(b => branches.includes(b));
+  return hasZhui && hasChan;
 }
 
 // 五鬼
@@ -375,12 +453,20 @@ function getFiveGhost(stem, branch) {
   return xunVoid.map(b => (b + 6) % 12);
 }
 
+// 十二长生位
+function getGrowthStage(stem, branch) {
+  const start = GROWTH_START[stem];
+  if (IS_YANG[stem]) {
+    return ((branch - start) % 12 + 12) % 12;
+  } else {
+    return ((start - branch) % 12 + 12) % 12;
+  }
+}
+
 // ==================== 用神判断 ====================
 
 function determineUsefulGod(pillars) {
   const dayEl = STEM_EL[pillars.day.stem];
-
-  // 统计八字五行力量
   const power = [0,0,0,0,0];
   const allPillars = [pillars.year, pillars.month, pillars.day, pillars.hour];
 
@@ -388,46 +474,37 @@ function determineUsefulGod(pillars) {
     power[STEM_EL[p.stem]] += 1.5;
     power[BRANCH_EL[p.branch]] += 1.0;
   }
-  // 月令加权(月支得令力量最大)
   power[BRANCH_EL[pillars.month.branch]] += 2.0;
 
-  // 自身力量 = 同类 + 生我
   const selfPower = power[dayEl] + power[GEN_BY[dayEl]];
-  // 异类力量 = 克我 + 我克 + 我生
   const otherPower = power[CTRL_BY[dayEl]] + power[CONTROLS[dayEl]] + power[GENERATES[dayEl]];
-
   const isStrong = selfPower >= otherPower;
 
   let usefulGod, inauspiciousGod;
   if (isStrong) {
-    // 身强: 用神为克泄耗 (官杀、食伤、财星)
-    // 优先取克制: 克我者为官杀
     usefulGod = CTRL_BY[dayEl];
-    inauspiciousGod = GEN_BY[dayEl]; // 生我者为忌
+    inauspiciousGod = GEN_BY[dayEl];
   } else {
-    // 身弱: 用神为生扶 (印星、比劫)
-    usefulGod = GEN_BY[dayEl]; // 生我者为用
-    inauspiciousGod = CTRL_BY[dayEl]; // 克我者为忌
+    usefulGod = GEN_BY[dayEl];
+    inauspiciousGod = CTRL_BY[dayEl];
   }
 
   return {
-    dayElement: dayEl,
-    isStrong,
-    usefulGod,
-    inauspiciousGod,
-    selfPower: selfPower.toFixed(1),
-    otherPower: otherPower.toFixed(1)
+    dayElement: dayEl, isStrong, usefulGod, inauspiciousGod,
+    selfPower: selfPower.toFixed(1), otherPower: otherPower.toFixed(1)
   };
 }
 
-// ==================== 棺材底 ====================
-// 核心: 流年为忌神年 — 直接为忌/克用/泄用/伤身等多路径均计分
-// 棺材底成立 = 流年不利; 棺材底+棺材盖 = 生死关口(大劫)
+// ==================== 棺材底 (修正版) ====================
+// 核心三大模式:
+//   1. 普通命格, 受克而无生
+//   2. 日主旺, 受生而无泄
+//   3. 日主受耗泄过重而无生
+// 即: 旺而逢生, 弱而被克泄 → 五行严重失衡
 
 function checkCoffinBottom(pillars, godInfo, yearStem, yearBranch, flowBirth) {
   const dayEl = godInfo.dayElement;
-  const useful = godInfo.usefulGod;
-  const ominous = godInfo.inauspiciousGod;
+  const isStrong = godInfo.isStrong;
 
   let score = 0;
   const reasons = [];
@@ -437,120 +514,204 @@ function checkCoffinBottom(pillars, godInfo, yearStem, yearBranch, flowBirth) {
   const fbStemEl = STEM_EL[flowBirth.stem];
   const fbBranchEl = BRANCH_EL[flowBirth.branch];
 
-  // === 主条件: 流年干支为忌神 (+3) ===
-  if (yStemEl === ominous) { score += 3; reasons.push('流年天干为忌神(' + ELEMENTS[ominous] + ')'); }
-  if (yBranchEl === ominous) { score += 3; reasons.push('流年地支为忌神'); }
+  // 分析流年+流生四个五行位的关系
+  const flowEls = [yStemEl, yBranchEl, fbStemEl, fbBranchEl];
+  let keCount = 0, shengCount = 0, xieCount = 0, haoCount = 0, tongCount = 0;
+  for (const e of flowEls) {
+    if (e === CTRL_BY[dayEl]) keCount++;   // 克我
+    if (e === GEN_BY[dayEl]) shengCount++; // 生我
+    if (e === GENERATES[dayEl]) xieCount++;  // 我生(泄)
+    if (e === CONTROLS[dayEl]) haoCount++;   // 我克(耗)
+    if (e === dayEl) tongCount++;            // 同类
+  }
 
-  // === 次条件: 克泄损害 (+2) ===
-  if (CONTROLS[yStemEl] === useful) { score += 2; reasons.push('流年天干克用神'); }
-  if (CONTROLS[yStemEl] === dayEl && !godInfo.isStrong) { score += 2; reasons.push('流年克身弱日主'); }
-  if ((yearBranch + 6) % 12 === pillars.day.branch) { score += 2; reasons.push('流年冲日支'); }
-  if (GENERATES[yStemEl] === ominous) { score += 2; reasons.push('流年天干生忌神'); }
-  if (CONTROLS[yBranchEl] === useful) { score += 2; reasons.push('流年地支克用神'); }
-  if (GENERATES[useful] === yStemEl) { score += 2; reasons.push('流年泄用神之气'); }
+  // === 模式1: 受克而无生 (普通/弱命格, 被攻击无援) ===
+  if (keCount > 0 && shengCount === 0 && tongCount === 0) {
+    score += 3 + keCount;
+    reasons.push('受克而无生(克' + keCount + '位)');
+  }
 
-  // === 辅条件: 流生加重 (+1) ===
-  if (fbStemEl === ominous) { score += 1; reasons.push('流生天干为忌神'); }
-  if (fbBranchEl === ominous) { score += 1; reasons.push('流生地支为忌神'); }
-  if ((yearBranch + 6) % 12 === pillars.month.branch) { score += 1; reasons.push('流年冲月令'); }
+  // === 模式2: 日主旺而受生无泄 (旺上加旺, 无出路) ===
+  if (isStrong && (shengCount + tongCount) > 0 && xieCount === 0 && keCount === 0) {
+    score += 3 + shengCount + tongCount;
+    reasons.push('日主旺而逢生无泄');
+  }
 
-  // 门槛: >= 5 (需多条件叠加, 单一条件不足以定论)
-  return { isTrue: score >= 5, score, reasons };
+  // === 模式3: 耗泄过重而无生 (被消耗殆尽) ===
+  if ((xieCount + haoCount) >= 2 && shengCount === 0 && tongCount === 0) {
+    score += 3 + xieCount + haoCount;
+    reasons.push('耗泄过重而无生扶');
+  }
+
+  // === 补充: 弱而克泄交加 ===
+  if (!isStrong && keCount > 0 && xieCount > 0 && shengCount === 0 && tongCount === 0) {
+    score += 2;
+    reasons.push('身弱克泄交加');
+  }
+
+  // === 辅助: 流年冲日支 ===
+  if ((yearBranch + 6) % 12 === pillars.day.branch) {
+    score += 2;
+    reasons.push('流年冲日支');
+  }
+
+  return { isTrue: score >= 4, score, reasons };
 }
 
-// ==================== 棺材盖 ====================
-// 核心: 三空必须在关键位严格交汇, 条件从严
+// ==================== 棺材盖 (修正版) ====================
+// 六大条件:
+//   1. 三空相会: 日柱旬空 + (截路 或 追铲同现)
+//   2. 三方空亡: 旬空覆盖多方, 流年方必有空
+//   3. 病死墓绝胎: 日干在三方均处气衰之地
+//   4. 五鬼带两空
+//   5. 三方有三合三会局遇空亡
+//   6. 忌神逢生旺地
 
-function checkCoffinLid(pillars, flowBirth, flowComb, yearStem, yearBranch) {
+function checkCoffinLid(pillars, flowBirth, flowComb, yearStem, yearBranch, godInfo) {
   const dayBranch = pillars.day.branch;
+  const dayStem = pillars.day.stem;
   const fbBranch = flowBirth.branch;
   const yBranch = yearBranch;
-
-  // 三个关键位: 日支、流生支、流年支(太岁)
-  const criticalPos = [dayBranch, fbBranch, yBranch];
-
-  // 旬空: 仅用流生查 (不叠加日柱旬空, 避免过松)
-  const xunVoid = getXunVoid(flowBirth.stem, flowBirth.branch);
-  // 路空: 用日干
-  const pathVoid = getPathVoid(pillars.day.stem);
-  // 魂空: 用日干
-  const soulVoid = getSoulVoid(pillars.day.stem);
+  const criticalPos = [dayBranch, fbBranch, yBranch]; // 三方: 日支、流生支、流年支
 
   const reasons = [];
   const voidDetails = [];
-  let lidScore = 0; // 棺材盖积分, 用于最终排序
+  let lidScore = 0;
 
-  // ===== 一盘: 三空相会 =====
-  // 日支同时落入旬空+路空+魂空 (最严格, 概率约1/100)
+  // ===== 旬空 =====
+  const xunVoid = getXunVoid(flowBirth.stem, flowBirth.branch);
   const dayInXun = xunVoid.includes(dayBranch);
-  const dayInPath = pathVoid.includes(dayBranch);
-  const dayInSoul = soulVoid.includes(dayBranch);
-  const threeVoidConverge = dayInXun && dayInPath && dayInSoul;
-  if (threeVoidConverge) { reasons.push('一盘·三空相会(日支三空齐聚)'); lidScore += 10; }
 
-  // ===== 一盘: 三方空亡 =====
-  // 同一种空在全部三个关键位都出现 (不是两个, 必须三个)
-  const xunCount = criticalPos.filter(b => xunVoid.includes(b)).length;
-  const pathCount = criticalPos.filter(b => pathVoid.includes(b)).length;
-  const soulCount = criticalPos.filter(b => soulVoid.includes(b)).length;
-  const threeDirectionVoid = xunCount === 3 || pathCount === 3 || soulCount === 3;
-  if (threeDirectionVoid) { reasons.push('一盘·三方空亡(同空覆三位)'); lidScore += 8; }
+  // ===== 截路空亡 (壬癸天干) =====
+  const pathNatal = isRenGui(pillars.hour.stem);
+  const pathFlowYear = isRenGui(yearStem);
+  const pathFlowBirth = isRenGui(flowBirth.stem);
+  const hasPathVoid = pathNatal || pathFlowYear || pathFlowBirth;
 
-  // ===== 二盘: 冲补空 =====
-  // 需要: 关键位六冲旬空支 + 该位本身路空或魂空 (双重条件)
-  let clashVoid = false;
-  for (const b of criticalPos) {
-    const clash = (b + 6) % 12;
-    const hasClashXun = xunVoid.includes(clash);
-    const selfVoidCount = (pathVoid.includes(b) ? 1 : 0) + (soulVoid.includes(b) ? 1 : 0);
-    if (hasClashXun && selfVoidCount >= 2) {
-      clashVoid = true;
-      reasons.push('二盘·冲补空(' + BRANCHES[b] + '冲' + BRANCHES[clash] + ',兼路空魂空)');
-      lidScore += 6;
-      break;
-    }
-  }
+  // ===== 游魂空亡 (追铲同现) =====
+  // 同时看年干、日干、流生干, 检查地支中是否追铲同现
+  const allBranches = [
+    pillars.year.branch, pillars.month.branch,
+    pillars.day.branch, pillars.hour.branch,
+    yearBranch, flowBirth.branch
+  ];
+  const soulYear = checkZhuiChan(pillars.year.stem, allBranches);
+  const soulDay = checkZhuiChan(pillars.day.stem, allBranches);
+  const soulFB = checkZhuiChan(flowBirth.stem, [yearBranch, dayBranch, fbBranch]);
+  const hasSoulVoid = soulYear || soulDay || soulFB;
 
-  // ===== 三盘: 五鬼 =====
+  // ===== 五鬼 =====
   const fiveGhost = getFiveGhost(yearStem, yearBranch);
 
-  // 五鬼带两空: 某关键位同时是五鬼+两种空亡
-  let ghostTwoVoids = false;
+  // ===== 1. 三空相会: 日柱旬空为标志 + (截路 或 追铲同现) =====
+  let threeVoidMeet = false;
+  if (dayInXun && (hasPathVoid || hasSoulVoid)) {
+    threeVoidMeet = true;
+    const parts = [];
+    if (hasPathVoid) parts.push('截路');
+    if (hasSoulVoid) parts.push('追铲同现');
+    reasons.push('三空相会(日支旬空+' + parts.join('+') + ')');
+    lidScore += 10;
+  }
+
+  // ===== 2. 三方空亡: 旬空覆多方, 流年方必有 =====
+  let threeDirectionVoid = false;
+  const xunCount = criticalPos.filter(b => xunVoid.includes(b)).length;
+  const xunInFlow = xunVoid.includes(fbBranch) || xunVoid.includes(yBranch);
+  if (xunCount >= 2 && xunInFlow) {
+    threeDirectionVoid = true;
+    reasons.push('三方空亡(旬空覆' + xunCount + '方,流年方有空)');
+    lidScore += 8;
+  }
+
+  // ===== 3. 病死墓绝胎: 日干在三方均处气衰之地 =====
+  let deathStage = false;
+  const weakStages = [6,7,8,9,10]; // 病死墓绝胎
+  const stages = criticalPos.map(b => getGrowthStage(dayStem, b));
+  if (stages.every(s => weakStages.includes(s))) {
+    deathStage = true;
+    const names = stages.map(s => GROWTH_STAGES[s]);
+    reasons.push('病死墓绝胎(日干三方:' + names.join('/') + ')');
+    lidScore += 7;
+  }
+
+  // ===== 4. 五鬼带两空 =====
+  let ghostVoids = false;
   for (const b of criticalPos) {
     if (fiveGhost.includes(b)) {
-      let voidCount = 0;
-      if (xunVoid.includes(b)) voidCount++;
-      if (pathVoid.includes(b)) voidCount++;
-      if (soulVoid.includes(b)) voidCount++;
-      if (voidCount >= 2) {
-        ghostTwoVoids = true;
-        reasons.push('三盘·五鬼带两空(' + BRANCHES[b] + '位)');
+      let vc = 0;
+      if (xunVoid.includes(b)) vc++;
+      if (hasPathVoid) vc++;
+      if (hasSoulVoid) vc += 2; // 追铲同现视作两个魂空
+      if (vc >= 2) {
+        ghostVoids = true;
+        reasons.push('五鬼带两空(' + BRANCHES[b] + '位)');
         lidScore += 5;
         break;
       }
     }
   }
 
-  // 五鬼压三方: 五鬼在全部三个关键位都出现
-  const ghostThreeDir = criticalPos.filter(b => fiveGhost.includes(b)).length === 3;
-  if (ghostThreeDir && !ghostTwoVoids) { reasons.push('三盘·五鬼压三方'); lidScore += 5; }
-
-  // 记录空亡分布
-  for (const b of criticalPos) {
-    const voids = [];
-    if (xunVoid.includes(b)) voids.push('旬空');
-    if (pathVoid.includes(b)) voids.push('路空');
-    if (soulVoid.includes(b)) voids.push('魂空');
-    if (fiveGhost.includes(b)) voids.push('五鬼');
-    if (voids.length > 0) voidDetails.push({ branch: BRANCHES[b], voids });
+  // ===== 5. 三合三会遇空亡 =====
+  let comboVoid = false;
+  const cpSet = new Set(criticalPos);
+  for (const combo of [...SAN_HE, ...SAN_HUI]) {
+    const matchCount = combo.filter(b => cpSet.has(b)).length;
+    if (matchCount >= 2) {
+      const hasVoidInCombo = combo.some(b => xunVoid.includes(b));
+      if (hasVoidInCombo) {
+        comboVoid = true;
+        reasons.push('三方成局遇空亡');
+        lidScore += 5;
+        break;
+      }
+    }
   }
 
-  const isTrue = threeVoidConverge || threeDirectionVoid || clashVoid || ghostTwoVoids || ghostThreeDir;
+  // ===== 6. 忌神逢生旺地 =====
+  let ominousStrong = false;
+  if (godInfo) {
+    const omStem = godInfo.inauspiciousGod * 2; // 取忌神五行的阳干
+    const omStage = getGrowthStage(omStem, yearBranch);
+    if (omStage === 0 || omStage === 4) { // 长生 或 帝旺
+      ominousStrong = true;
+      reasons.push('忌神逢' + GROWTH_STAGES[omStage]);
+      lidScore += 3;
+    }
+  }
+
+  // ===== 记录空亡分布 =====
+  for (const b of criticalPos) {
+    const vs = [];
+    if (xunVoid.includes(b)) vs.push('旬空');
+    if (fiveGhost.includes(b)) vs.push('五鬼');
+    if (vs.length > 0) voidDetails.push({ branch: BRANCHES[b], voids: vs });
+  }
+  if (hasPathVoid) {
+    const pv = [];
+    if (pathNatal) pv.push('时柱' + STEMS[pillars.hour.stem]);
+    if (pathFlowYear) pv.push('流年' + STEMS[yearStem]);
+    if (pathFlowBirth) pv.push('流生' + STEMS[flowBirth.stem]);
+    voidDetails.push({ branch: '截路', voids: pv });
+  }
+  if (hasSoulVoid) {
+    const sv = [];
+    if (soulYear) sv.push('年干' + STEMS[pillars.year.stem]);
+    if (soulDay) sv.push('日干' + STEMS[pillars.day.stem]);
+    if (soulFB) sv.push('流生' + STEMS[flowBirth.stem]);
+    voidDetails.push({ branch: '游魂', voids: sv });
+  }
+
+  // 棺材盖成立: 任一重要条件成立 (lidScore >= 5), 或三空相会
+  const isTrue = lidScore >= 5;
 
   return {
     isTrue, reasons, voidDetails, lidScore,
-    threeVoidConverge, threeDirectionVoid, clashVoid, ghostTwoVoids, ghostThreeDir,
-    xunVoid, pathVoid, soulVoid, fiveGhost
+    threeVoidMeet, threeDirectionVoid, deathStage, ghostVoids, comboVoid, ominousStrong,
+    dayInXun, hasPathVoid, hasSoulVoid,
+    xunVoid, fiveGhost,
+    pathNatal, pathFlowYear, pathFlowBirth,
+    soulYear, soulDay, soulFB
   };
 }
 
@@ -559,11 +720,12 @@ function checkCoffinLid(pillars, flowBirth, flowComb, yearStem, yearBranch) {
 function determineSeverity(coffinBottom, coffinLid) {
   if (!coffinBottom.isTrue || !coffinLid.isTrue) return null;
 
-  if (coffinLid.threeVoidConverge) return { level: 3, name: '大关口', color: 'var(--red2)', desc: '一盘三空定死局 — 最危险级别' };
+  if (coffinLid.threeVoidMeet) return { level: 3, name: '大关口', color: 'var(--red2)', desc: '三空相会 — 最危险级别' };
   if (coffinLid.threeDirectionVoid) return { level: 3, name: '大关口', color: 'var(--red2)', desc: '三方空亡 — 极度危险' };
-  if (coffinLid.ghostTwoVoids) return { level: 2, name: '中关口', color: 'var(--earth)', desc: '五鬼带两空 — 需重点化解' };
-  if (coffinLid.ghostThreeDir) return { level: 2, name: '中关口', color: 'var(--earth)', desc: '五鬼压三方 — 需及时化解' };
-  if (coffinLid.clashVoid) return { level: 2, name: '中关口', color: 'var(--earth)', desc: '二盘冲补空 — 暗藏危机' };
+  if (coffinLid.deathStage) return { level: 3, name: '大关口', color: 'var(--red2)', desc: '病死墓绝胎 — 日干三方气衰' };
+  if (coffinLid.ghostVoids) return { level: 2, name: '中关口', color: 'var(--earth)', desc: '五鬼带两空 — 需重点化解' };
+  if (coffinLid.comboVoid) return { level: 2, name: '中关口', color: 'var(--earth)', desc: '三合三会遇空亡 — 暗藏危机' };
+  if (coffinLid.ominousStrong) return { level: 1, name: '小关口', color: '#e67e22', desc: '忌神逢生旺 — 可化解' };
   return { level: 1, name: '小关口', color: '#e67e22', desc: '条件部分成立 — 可化解' };
 }
 
@@ -615,34 +777,25 @@ function analyzeAllYears(pillars, godInfo, birthYear, birthMonth, birthDay) {
   const endYear = birthYear + 100;
 
   for (let y = startYear; y <= endYear; y++) {
-    // 流年干支
     const yearStem = ((y - 4) % 10 + 10) % 10;
     const yearBranch = ((y - 4) % 12 + 12) % 12;
 
-    // 流生: 所测之年的出生日干支
     let fbMonth = birthMonth;
     let fbDay = birthDay;
-    // 处理闰年2月29日
     if (fbMonth === 2 && fbDay === 29) {
       const isLeap = (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
       if (!isLeap) fbDay = 28;
     }
     const flowBirth = getDayStemBranch(y, fbMonth, fbDay);
-
-    // 流组: 流年天干 + 流生地支
     const flowComb = { stem: yearStem, branch: flowBirth.branch };
 
-    // 棺材底
     const coffinBottom = checkCoffinBottom(pillars, godInfo, yearStem, yearBranch, flowBirth);
-    // 棺材盖
-    const coffinLid = checkCoffinLid(pillars, flowBirth, flowComb, yearStem, yearBranch);
+    const coffinLid = checkCoffinLid(pillars, flowBirth, flowComb, yearStem, yearBranch, godInfo);
 
-    // 综合评分 (用于最终筛选)
     const totalScore = coffinBottom.score + (coffinLid.lidScore || 0);
 
     results.push({
-      year: y,
-      age: y - birthYear,
+      year: y, age: y - birthYear,
       yearStem, yearBranch,
       yearGanZhi: STEMS[yearStem] + BRANCHES[yearBranch],
       flowBirth, flowComb,
@@ -652,16 +805,11 @@ function analyzeAllYears(pillars, godInfo, birthYear, birthMonth, birthDay) {
     });
   }
 
-  // ====== 关键: 筛选真正的生死关口 (最多3个) ======
-  // 1. 找出所有棺材底+棺材盖同时成立的年份
+  // 筛选生死关口 (最多3个)
   const candidates = results.filter(r => r.coffinBottom.isTrue && r.coffinLid.isTrue);
-
-  // 2. 按综合严重度排序, 只取前3个最凶的
   candidates.sort((a, b) => b.totalScore - a.totalScore);
-  const MAX_CRISIS = 3;
-  const crisisYears = candidates.slice(0, MAX_CRISIS);
+  const crisisYears = candidates.slice(0, 3);
 
-  // 3. 标记这些年份为生死关口
   for (const crisis of crisisYears) {
     const r = results.find(x => x.year === crisis.year);
     r.isCrisis = true;
@@ -669,8 +817,7 @@ function analyzeAllYears(pillars, godInfo, birthYear, birthMonth, birthDay) {
     r.danger = r.severity ? Math.min(r.severity.level + 1, 3) : 2;
   }
 
-  // 4. 棺材底成立的年份标为"流年不利" (但不是关口)
-  // 注意: 单纯三空年无意义, 不标记; 逢三空须配合棺材底才为大劫
+  // 棺材底成立 = 流年不利; 单纯三空年无意义
   for (const r of results) {
     if (r.isCrisis) continue;
     if (r.coffinBottom.isTrue) r.danger = 1;
@@ -689,6 +836,13 @@ function selectGender(btn) {
   gender = btn.dataset.gender;
 }
 
+function toggleRef() {
+  const content = document.getElementById('refContent');
+  const arrow = document.getElementById('refArrow');
+  content.classList.toggle('show');
+  arrow.classList.toggle('open');
+}
+
 function startPrediction() {
   const year = parseInt(document.getElementById('birthYear').value);
   const month = parseInt(document.getElementById('birthMonth').value);
@@ -700,7 +854,6 @@ function startPrediction() {
     return;
   }
 
-  // 显示加载
   const loading = document.getElementById('loading');
   const loadingStep = document.getElementById('loadingStep');
   loading.classList.remove('hide');
@@ -714,27 +867,18 @@ function startPrediction() {
 
   setTimeout(() => {
     clearInterval(stepInterval);
-
     try {
-      // 计算四柱
       const pillars = calculateFourPillars(year, month, day, hour);
       const godInfo = determineUsefulGod(pillars);
-
-      // 推演所有年份
       const results = analyzeAllYears(pillars, godInfo, year, month, day);
-
       analysisData = { pillars, godInfo, results, birthYear: year };
 
-      // 渲染结果
       renderPillars(pillars, godInfo);
       renderGodInfo(godInfo);
       renderTimeline(results, year);
       renderStats(results);
 
-      // 显示结果
       document.getElementById('results').style.display = 'block';
-
-      // 滚动到结果
       setTimeout(() => {
         document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
       }, 300);
@@ -742,8 +886,6 @@ function startPrediction() {
       alert('推演出错: ' + e.message);
       console.error(e);
     }
-
-    // 隐藏加载（即使出错也要关闭）
     loading.classList.add('hide');
   }, 2500);
 }
@@ -752,7 +894,6 @@ function renderPillars(pillars, godInfo) {
   const container = document.getElementById('pillarsDisplay');
   const names = ['年柱','月柱','日柱','时柱'];
   const keys = ['year','month','day','hour'];
-
   container.innerHTML = keys.map((key, i) => {
     const p = pillars[key];
     const stemEl = STEM_EL[p.stem];
@@ -787,13 +928,10 @@ function renderGodInfo(godInfo) {
 }
 
 function renderTimeline(results, birthYear) {
-  // 按十年分组
   const decades = [];
   for (let i = 0; i < results.length; i += 10) {
     decades.push(results.slice(i, i + 10));
   }
-
-  // 渲染年代按钮
   const btnContainer = document.getElementById('decadeButtons');
   btnContainer.innerHTML = decades.map((dec, i) => {
     const startAge = dec[0].age;
@@ -805,7 +943,6 @@ function renderTimeline(results, birthYear) {
               ${startAge}-${endAge}岁
             </button>`;
   }).join('');
-
   currentDecade = 0;
   renderDecade(decades[0]);
 }
@@ -815,7 +952,6 @@ function switchDecade(idx) {
   document.querySelectorAll('.decade-btn').forEach((b, i) => {
     b.classList.toggle('active', i === idx);
   });
-
   const results = analysisData.results;
   const decades = [];
   for (let i = 0; i < results.length; i += 10) {
@@ -837,8 +973,6 @@ function renderDecade(decadeData) {
       </div>
     `;
   }).join('');
-
-  // 重置详情面板
   document.getElementById('detailPanel').innerHTML = '<div style="text-align:center;color:var(--dim);padding:30px">点击上方年份查看详细分析</div>';
 }
 
@@ -846,14 +980,13 @@ function showDetail(year) {
   const r = analysisData.results.find(x => x.year === year);
   if (!r) return;
 
-  // 选中状态
   document.querySelectorAll('.year-dot').forEach(el => el.classList.remove('selected'));
   const yd = document.getElementById('yd-' + year);
   if (yd) yd.classList.add('selected');
 
   const panel = document.getElementById('detailPanel');
+  const pillars = analysisData.pillars;
 
-  // 判定词
   let verdictClass, verdictText;
   if (r.isCrisis) {
     verdictClass = 'verdict-danger';
@@ -866,7 +999,6 @@ function showDetail(year) {
     verdictText = '平安';
   }
 
-  // 流年信息
   let html = `
     <div class="detail-header">
       <div class="detail-year">${r.year}年 · ${STEMS[r.yearStem]}${BRANCHES[r.yearBranch]}年 · ${r.age}岁</div>
@@ -888,7 +1020,7 @@ function showDetail(year) {
     });
     html += `</div>`;
   } else {
-    html += `<span style="color:var(--green)">不成立 (分值${r.coffinBottom.score}/5)</span>`;
+    html += `<span style="color:var(--green)">不成立 (分值${r.coffinBottom.score}/4)</span>`;
   }
   html += `</div>`;
 
@@ -913,11 +1045,29 @@ function showDetail(year) {
     html += `</div>`;
   }
 
-  // 旬空路空魂空五鬼具体值
+  // 空亡详细值
   html += `<div class="detail-row" style="margin-top:8px;font-size:11px;color:var(--dim)">`;
   html += `旬空[${r.coffinLid.xunVoid.map(b=>BRANCHES[b]).join(',')}] `;
-  html += `路空[${r.coffinLid.pathVoid.map(b=>BRANCHES[b]).join(',')}] `;
-  html += `魂空[${r.coffinLid.soulVoid.map(b=>BRANCHES[b]).join(',')}] `;
+  // 截路
+  if (r.coffinLid.hasPathVoid) {
+    const pv = [];
+    if (r.coffinLid.pathNatal) pv.push('时柱' + STEMS[pillars.hour.stem]);
+    if (r.coffinLid.pathFlowYear) pv.push('流年' + STEMS[r.yearStem]);
+    if (r.coffinLid.pathFlowBirth) pv.push('流生' + STEMS[r.flowBirth.stem]);
+    html += `截路[${pv.join(',')}] `;
+  } else {
+    html += `截路[无] `;
+  }
+  // 游魂
+  if (r.coffinLid.hasSoulVoid) {
+    const sv = [];
+    if (r.coffinLid.soulYear) sv.push('年干');
+    if (r.coffinLid.soulDay) sv.push('日干');
+    if (r.coffinLid.soulFB) sv.push('流生');
+    html += `游魂[追铲:${sv.join(',')}] `;
+  } else {
+    html += `游魂[无] `;
+  }
   html += `五鬼[${r.coffinLid.fiveGhost.map(b=>BRANCHES[b]).join(',')}]`;
   html += `</div>`;
 
@@ -928,7 +1078,6 @@ function showDetail(year) {
     html += `<span style="margin-left:8px;font-size:13px">${r.severity.desc}</span>`;
     html += `</div>`;
 
-    // 化解建议
     const resolution = getResolution(r.severity);
     if (resolution) {
       html += `<div class="resolve-box"><h4>${resolution.title}</h4><p>`;
@@ -989,7 +1138,6 @@ function jumpToYear(year) {
   document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
 }
 
-// 页面加载完成后设置默认值
 document.addEventListener('DOMContentLoaded', () => {
   const now = new Date();
   document.getElementById('birthYear').value = now.getFullYear() - 30;
